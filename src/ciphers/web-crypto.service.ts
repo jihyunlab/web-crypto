@@ -1,7 +1,4 @@
-import {
-  Cipher,
-  Options as CipherOptions,
-} from '../interfaces/cipher.interface';
+import { Cipher, Options } from '../interfaces/cipher.interface';
 import { Key } from '../helpers/key.helper';
 import { WebArrayConverter } from '@jihyunlab/web-array-converter';
 
@@ -35,7 +32,7 @@ export class WebCryptoCipher implements Cipher {
     ivLength: number,
     tagLength?: number,
     additionalData?: Uint8Array,
-    options?: CipherOptions
+    options?: Options
   ) {
     let salt = '';
     let iterations = 128;

@@ -1,6 +1,6 @@
 import {
-  Cipher,
   CIPHER,
+  Cipher,
   Creator,
   Options,
 } from '../interfaces/cipher.interface';
