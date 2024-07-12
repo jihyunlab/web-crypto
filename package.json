@@ -1,6 +1,6 @@
 {
   "name": "@jihyunlab/web-crypto",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "JihyunLab Web crypto.",
   "license": "MIT",
   "author": "JihyunLab <info@jihyunlab.com> (https://jihyunlab.com)",
@@ -28,7 +28,7 @@
     "aes-gcm"
   ],
   "dependencies": {
-    "@jihyunlab/web-array-converter": "^1.0.3"
+    "@jihyunlab/web-array-converter": "^1.0.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.6.0",
