@@ -1,13 +1,8 @@
-import {
-  CIPHER,
-  Cipher,
-  Creator,
-  Options,
-} from '../interfaces/cipher.interface';
+import { CIPHER, Cipher, CipherOptions } from '../interfaces/cipher.interface';
 import { WebCryptoCipher } from './web-crypto.service';
 
-export const CipherCreator: Creator = {
-  async create(cipher: CIPHER, password: string, options?: Options) {
+export const CipherCreator = {
+  async create(cipher: CIPHER, password: string, options?: CipherOptions) {
     let instance: Cipher;
 
     let ivLength: number | undefined;
