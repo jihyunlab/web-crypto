@@ -111,20 +111,13 @@ export class WebCryptoCipher implements Cipher {
       textArray
     );
 
-    if (typeof text === 'string') {
-      return (
-        WebArrayConverter.from(iv).toString('hex') +
-        WebArrayConverter.from(new Uint8Array(ciphertext)).toString('hex')
-      );
-    } else {
-      const uint8Array = new Uint8Array(ciphertext);
+    const uint8Array = new Uint8Array(ciphertext);
 
-      const encryptedArray = new Uint8Array(iv.length + uint8Array.length);
-      encryptedArray.set(iv, 0);
-      encryptedArray.set(uint8Array, iv.length);
+    const encrypted = new Uint8Array(iv.length + uint8Array.length);
+    encrypted.set(iv, 0);
+    encrypted.set(uint8Array, iv.length);
 
-      return encryptedArray;
-    }
+    return encrypted;
   }
 
   public async decrypt(text: string | Uint8Array) {
@@ -162,16 +155,12 @@ export class WebCryptoCipher implements Cipher {
       throw new Error('ciphertext conversion failed.');
     }
 
-    const plaintext = await crypto.subtle.decrypt(
+    const decrypted = await crypto.subtle.decrypt(
       this.params(this.cipher, iv, this.tagLength, this.additionalData),
       this.key,
       ciphertext
     );
 
-    if (typeof text === 'string') {
-      return new TextDecoder().decode(plaintext);
-    } else {
-      return new Uint8Array(plaintext);
-    }
+    return new Uint8Array(decrypted);
   }
 }
