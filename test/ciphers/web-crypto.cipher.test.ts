@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { WebCryptoCipher } from '../../src/ciphers/web-crypto.service';
+import { WebCryptoCipher } from '../../src/ciphers/web-crypto.cipher';
 import { Key } from '../../src/helpers/key.helper';
 import { WebBuffer } from '@jihyunlab/web-buffer';
 

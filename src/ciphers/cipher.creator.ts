@@ -1,5 +1,5 @@
 import { CIPHER, Cipher, CipherOptions } from '../interfaces/cipher.interface';
-import { WebCryptoCipher } from './web-crypto.service';
+import { WebCryptoCipher } from './web-crypto.cipher';
 
 export const CipherCreator = {
   async create(cipher: CIPHER, password: string, options?: CipherOptions) {
