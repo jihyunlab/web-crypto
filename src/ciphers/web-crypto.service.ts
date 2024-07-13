@@ -1,6 +1,6 @@
 import { Cipher, CipherOptions } from '../interfaces/cipher.interface';
 import { Key } from '../helpers/key.helper';
-import { WebArrayConverter } from '@jihyunlab/web-array-converter';
+import { WebArrayConverter } from '../array-converter';
 
 const crypto = globalThis.crypto;
 

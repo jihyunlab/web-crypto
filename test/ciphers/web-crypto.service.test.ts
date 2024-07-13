@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+import { WebArrayConverter } from '../../src/array-converter';
 import { WebCryptoCipher } from '../../src/ciphers/web-crypto.service';
 import { Key } from '../../src/helpers/key.helper';
-import { WebArrayConverter } from '@jihyunlab/web-array-converter';
 
 describe('Web crypto cipher', () => {
   test(`Negative: encrypt() - key does not exist.`, async () => {
