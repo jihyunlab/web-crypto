@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import { WebArrayConverter } from '../../src/array-converter';
 import { WebCryptoCipher } from '../../src/ciphers/web-crypto.service';
 import { Key } from '../../src/helpers/key.helper';
+import { WebBuffer } from '@jihyunlab/web-buffer';
 
 describe('Web crypto cipher', () => {
   test(`Negative: encrypt() - key does not exist.`, async () => {
@@ -47,7 +47,7 @@ describe('Web crypto cipher', () => {
   });
 
   test(`Negative: decrypt() - iv conversion failed.`, async () => {
-    const spy = jest.spyOn(WebArrayConverter as any, 'from');
+    const spy = jest.spyOn(WebBuffer as any, 'from');
     spy.mockImplementation(() => {
       return {
         toUint8Array() {
@@ -67,7 +67,7 @@ describe('Web crypto cipher', () => {
   });
 
   test(`Negative: decrypt() - ciphertext conversion failed.`, async () => {
-    const spy = jest.spyOn(WebArrayConverter as any, 'from');
+    const spy = jest.spyOn(WebBuffer as any, 'from');
     spy
       .mockImplementationOnce(() => {
         return {

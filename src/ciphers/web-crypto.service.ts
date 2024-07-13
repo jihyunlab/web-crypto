@@ -1,6 +1,6 @@
 import { Cipher, CipherOptions } from '../interfaces/cipher.interface';
 import { Key } from '../helpers/key.helper';
-import { WebArrayConverter } from '../array-converter';
+import { WebBuffer } from '@jihyunlab/web-buffer';
 
 const crypto = globalThis.crypto;
 
@@ -133,12 +133,12 @@ export class WebCryptoCipher implements Cipher {
         throw new Error('invalid text.');
       }
 
-      iv = WebArrayConverter.from(
+      iv = WebBuffer.from(
         text.substring(0, this.ivLength * 2),
         'hex'
       ).toUint8Array();
 
-      ciphertext = WebArrayConverter.from(
+      ciphertext = WebBuffer.from(
         text.substring(this.ivLength * 2),
         'hex'
       ).toUint8Array();

@@ -20,10 +20,10 @@ npm i @jihyunlab/web-crypto
 You can easily encrypt and decrypt data with a simple method.
 
 ```
-import { CIPHER, Crypto } from '@jihyunlab/web-crypto';
+import { createCipher } from '@jihyunlab/web-crypto';
 
-const cipher = await Crypto.createCipher(
-  CIPHER.AES_256_GCM,
+const cipher = await createCipher(
+  'aes-256-gcm', /* 'aes-256-cbc', 'aes-256-gcm' */
   'your secret key'
 );
 
@@ -46,23 +46,23 @@ const decrypted = await cipher.decrypt(encrypted);
 console.log(decrypted); // Uint8Array(9)[106, 105, 104, 121, 117, 110, 108, 97, 98]
 ```
 
-## @jihyunlab/web-array-converter
+## @jihyunlab/web-buffer
 
-You can install [@jihyunlab/web-array-converter](https://www.npmjs.com/package/@jihyunlab/web-array-converter) to perform additional data conversions.
-
-```
-npm i @jihyunlab/web-array-converter
-```
+You can install [@jihyunlab/web-buffer](https://www.npmjs.com/package/@jihyunlab/web-buffer) to perform additional data conversions.
 
 ```
-import { WebArrayConverter } from '@jihyunlab/web-array-converter';
+npm i @jihyunlab/web-buffer
+```
 
-const converter = WebArrayConverter.from(
+```
+import { WebBuffer } from '@jihyunlab/web-buffer';
+
+const buffer = WebBuffer.from(
   new Uint8Array([106, 105, 104, 121, 117, 110, 108, 97, 98]),
   'uint8array' /* hex, base64, base64url, utf8, uint8array */
 );
 
-const utf8 = converter.toString('utf8');
+const utf8 = buffer.toString('utf8');
 console.log(utf8); // jihyunlab
 ```
 
