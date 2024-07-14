@@ -1,5 +1,5 @@
 import { Cipher, CipherOptions } from '../interfaces/cipher.interface';
-import { Key } from '../helpers/key.helper';
+import { KeyHelper } from '../helpers/key.helper';
 import { WebBuffer } from '@jihyunlab/web-buffer';
 
 const crypto = globalThis.crypto;
@@ -49,7 +49,13 @@ export class WebCryptoCipher implements Cipher {
       iterations = options.iterations;
     }
 
-    const key = await Key.pbkdf2(cipher, length, password, salt, iterations);
+    const key = await KeyHelper.pbkdf2(
+      cipher,
+      length,
+      password,
+      salt,
+      iterations
+    );
 
     const instance = new WebCryptoCipher(
       cipher,
