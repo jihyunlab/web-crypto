@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 import { WebCryptoCipher } from '../../src/ciphers/web-crypto.cipher';
-import { KeyHelper } from '../../src/helpers/key.helper';
 import { WebBuffer } from '@jihyunlab/web-buffer';
+import { KeyHelper } from '../../src/helpers/key.helper';
 
 describe('Web crypto cipher', () => {
   test(`Negative: encrypt() - key does not exist.`, async () => {
