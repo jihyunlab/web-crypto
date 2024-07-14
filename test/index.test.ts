@@ -1,22 +1,22 @@
 /**
  * @jest-environment jsdom
  */
-import { createCipher } from '../src/index';
+import { CIPHER, createCipher } from '../src/index';
 
 describe('Web crypto', () => {
   test(`Positive: CIPHER.AES_256_CBC`, async () => {
-    let cipher = await createCipher('aes-256-cbc', 'key');
+    let cipher = await createCipher(CIPHER.AES_256_CBC, 'key');
 
     const encrypted = await cipher.encrypt('value');
 
-    cipher = await createCipher('aes-256-cbc', 'key');
+    cipher = await createCipher(CIPHER.AES_256_CBC, 'key');
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([118, 97, 108, 117, 101]));
   });
 
   test(`Positive: CIPHER.AES_256_CBC - options`, async () => {
-    let cipher = await createCipher('aes-256-cbc', 'key', {
+    let cipher = await createCipher(CIPHER.AES_256_CBC, 'key', {
       salt: 'salt',
       iterations: 128,
       ivLength: 16,
@@ -24,7 +24,7 @@ describe('Web crypto', () => {
 
     const encrypted = await cipher.encrypt('value');
 
-    cipher = await createCipher('aes-256-cbc', 'key', {
+    cipher = await createCipher(CIPHER.AES_256_CBC, 'key', {
       salt: 'salt',
       iterations: 128,
       ivLength: 16,
@@ -35,11 +35,11 @@ describe('Web crypto', () => {
   });
 
   test(`Positive: CIPHER.AES_256_CBC - uint8array`, async () => {
-    let cipher = await createCipher('aes-256-cbc', 'key');
+    let cipher = await createCipher(CIPHER.AES_256_CBC, 'key');
 
     const encrypted = await cipher.encrypt(new Uint8Array([10, 20, 30, 40]));
 
-    cipher = await createCipher('aes-256-cbc', 'key');
+    cipher = await createCipher(CIPHER.AES_256_CBC, 'key');
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([10, 20, 30, 40]));
@@ -49,7 +49,7 @@ describe('Web crypto', () => {
     const encrypted =
       'e057f49f47d57c6ee73443473971b3b05a4f5e3b26285d57b8ef508d914aa1b7';
 
-    const cipher = await createCipher('aes-256-cbc', 'key');
+    const cipher = await createCipher(CIPHER.AES_256_CBC, 'key');
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([118, 97, 108, 117, 101]));
@@ -61,7 +61,7 @@ describe('Web crypto', () => {
       137, 76, 64, 175, 64, 56, 208, 93, 135, 35, 169, 141, 243, 198, 231,
     ]);
 
-    const cipher = await createCipher('aes-256-cbc', 'key');
+    const cipher = await createCipher(CIPHER.AES_256_CBC, 'key');
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([10, 20, 30, 40]));
@@ -71,7 +71,7 @@ describe('Web crypto', () => {
     const encrypted =
       'e36e4673703230dd1f7e8e2083a934760a6ca0e542a2f7ab9a61ee439601a983bcaacf2e75fb7343914ec30d41b44db4';
 
-    const cipher = await createCipher('aes-256-cbc', 'key');
+    const cipher = await createCipher(CIPHER.AES_256_CBC, 'key');
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(
@@ -83,18 +83,18 @@ describe('Web crypto', () => {
   });
 
   test(`Positive: CIPHER.AES_256_GCM`, async () => {
-    let cipher = await createCipher('aes-256-gcm', 'key');
+    let cipher = await createCipher(CIPHER.AES_256_GCM, 'key');
 
     const encrypted = await cipher.encrypt('value');
 
-    cipher = await createCipher('aes-256-gcm', 'key');
+    cipher = await createCipher(CIPHER.AES_256_GCM, 'key');
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([118, 97, 108, 117, 101]));
   });
 
   test(`Positive: CIPHER.AES_256_GCM - options`, async () => {
-    let cipher = await createCipher('aes-256-gcm', 'key', {
+    let cipher = await createCipher(CIPHER.AES_256_GCM, 'key', {
       salt: 'salt',
       iterations: 128,
       ivLength: 12,
@@ -104,7 +104,7 @@ describe('Web crypto', () => {
 
     const encrypted = await cipher.encrypt('value');
 
-    cipher = await createCipher('aes-256-gcm', 'key', {
+    cipher = await createCipher(CIPHER.AES_256_GCM, 'key', {
       salt: 'salt',
       additionalData: new Uint8Array([1, 2, 3, 4]),
     });
@@ -114,11 +114,11 @@ describe('Web crypto', () => {
   });
 
   test(`Positive: CIPHER.AES_256_GCM - uint8array`, async () => {
-    let cipher = await createCipher('aes-256-gcm', 'key');
+    let cipher = await createCipher(CIPHER.AES_256_GCM, 'key');
 
     const encrypted = await cipher.encrypt(new Uint8Array([10, 20, 30, 40]));
 
-    cipher = await createCipher('aes-256-gcm', 'key');
+    cipher = await createCipher(CIPHER.AES_256_GCM, 'key');
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([10, 20, 30, 40]));
@@ -128,7 +128,7 @@ describe('Web crypto', () => {
     const encrypted =
       '9788cd9c3c6a4012da2c359e3b00970ddd4021418c6801ba4eb379a799294d2e61';
 
-    const cipher = await createCipher('aes-256-gcm', 'key');
+    const cipher = await createCipher(CIPHER.AES_256_GCM, 'key');
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([118, 97, 108, 117, 101]));
@@ -141,7 +141,7 @@ describe('Web crypto', () => {
       191,
     ]);
 
-    const cipher = await createCipher('aes-256-gcm', 'key');
+    const cipher = await createCipher(CIPHER.AES_256_GCM, 'key');
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([10, 20, 30, 40]));
@@ -151,7 +151,7 @@ describe('Web crypto', () => {
     const encrypted =
       '5751cc2e9ddeb49c8ba5ed58b7b73a4129606a4249022df3c223ca2ed74557dbbc6f14e82935640dc52b3a70e9c6';
 
-    const cipher = await createCipher('aes-256-gcm', 'key');
+    const cipher = await createCipher(CIPHER.AES_256_GCM, 'key');
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(
