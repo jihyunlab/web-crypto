@@ -17,6 +17,21 @@ describe('Web crypto', () => {
     );
   });
 
+  test(`Positive: HASH.SHA_256 - uint8array`, async () => {
+    const hash = await createHash(HASH.SHA_256);
+    const hashed = await hash.digest(
+      new Uint8Array([106, 105, 104, 121, 117, 110, 108, 97, 98])
+    );
+
+    expect(hashed).toStrictEqual(
+      new Uint8Array([
+        200, 111, 45, 209, 157, 58, 63, 244, 241, 200, 144, 165, 32, 243, 10,
+        145, 101, 204, 44, 179, 226, 63, 57, 208, 185, 93, 101, 0, 122, 198, 82,
+        100,
+      ])
+    );
+  });
+
   test(`Positive: HASH.SHA_384`, async () => {
     const hash = await createHash(HASH.SHA_384);
     const hashed = await hash.digest(
