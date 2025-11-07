@@ -114,7 +114,7 @@ export class WebCryptoCipher implements Cipher {
     const ciphertext = await crypto.subtle.encrypt(
       this.params(this.cipher, iv, this.tagLength, this.additionalData),
       this.key,
-      textArray
+      textArray as unknown as BufferSource
     );
 
     const uint8Array = new Uint8Array(ciphertext);
@@ -164,7 +164,7 @@ export class WebCryptoCipher implements Cipher {
     const decrypted = await crypto.subtle.decrypt(
       this.params(this.cipher, iv, this.tagLength, this.additionalData),
       this.key,
-      ciphertext
+      ciphertext as unknown as BufferSource
     );
 
     return new Uint8Array(decrypted);

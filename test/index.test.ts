@@ -1,15 +1,40 @@
 /**
  * @jest-environment jsdom
  */
+import { WebBuffer } from '@jihyunlab/web-buffer';
+import { HASH, createHash } from '../src/index';
 import { CIPHER, createCipher } from '../src/index';
 
 describe('Web crypto', () => {
+  test(`Positive: HASH.SHA_256`, async () => {
+    const hash = await createHash(HASH.SHA_256);
+    const hashed = await hash.digest(
+      WebBuffer.from('jihyunlab', 'utf8').toUint8Array()
+    );
+
+    expect(WebBuffer.from(hashed, 'uint8array').toString('hex')).toBe(
+      'c86f2dd19d3a3ff4f1c890a520f30a9165cc2cb3e23f39d0b95d65007ac65264'
+    );
+  });
+
+  test(`Positive: HASH.SHA_384`, async () => {
+    const hash = await createHash(HASH.SHA_384);
+    const hashed = await hash.digest(
+      WebBuffer.from('jihyunlab', 'utf8').toUint8Array()
+    );
+
+    expect(WebBuffer.from(hashed, 'uint8array').toString('hex')).toStrictEqual(
+      'fafc0d25d3b79037e396608db8a27d1cfb7280da4dc51874b518c20073b890016aa89c8b6b17531b161538c3d8467970'
+    );
+  });
+
   test(`Positive: CIPHER.AES_256_CBC`, async () => {
     let cipher = await createCipher(CIPHER.AES_256_CBC, 'key');
 
     const encrypted = await cipher.encrypt('value');
 
     cipher = await createCipher(CIPHER.AES_256_CBC, 'key');
+
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([118, 97, 108, 117, 101]));
@@ -40,6 +65,7 @@ describe('Web crypto', () => {
     const encrypted = await cipher.encrypt(new Uint8Array([10, 20, 30, 40]));
 
     cipher = await createCipher(CIPHER.AES_256_CBC, 'key');
+
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([10, 20, 30, 40]));
@@ -88,6 +114,7 @@ describe('Web crypto', () => {
     const encrypted = await cipher.encrypt('value');
 
     cipher = await createCipher(CIPHER.AES_256_GCM, 'key');
+
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([118, 97, 108, 117, 101]));
@@ -108,6 +135,7 @@ describe('Web crypto', () => {
       salt: 'salt',
       additionalData: new Uint8Array([1, 2, 3, 4]),
     });
+
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([118, 97, 108, 117, 101]));
@@ -119,6 +147,7 @@ describe('Web crypto', () => {
     const encrypted = await cipher.encrypt(new Uint8Array([10, 20, 30, 40]));
 
     cipher = await createCipher(CIPHER.AES_256_GCM, 'key');
+
     const decrypted = await cipher.decrypt(encrypted);
 
     expect(decrypted).toStrictEqual(new Uint8Array([10, 20, 30, 40]));
